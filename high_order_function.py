@@ -150,3 +150,77 @@ def generador(inicio, fin, incremento):
 	while(inicio <= fin):
 		yield inicio # Devuelve valor
 		inicio += incremento
+
+# Recorre los valores del generador
+for valor in generador(0, 6, 1):
+	# Muestra los valores uno a uno
+	print(valor) # 0 1 2 3 4 5 6
+
+# Obtiene una lista del generador
+lista = list(generador(0, 8, 2))
+
+# Muestra la lista
+print(lista) # [0, 2, 4, 6, 8]
+
+""" La funcion Decorador """
+# Es una función que recibe una función como parámetro 
+# y devuelve otra función como valor de retorno
+
+# Define decorador
+def decorador1(funcion):
+    # Define función decorada
+    def funciondecorada(*param1, **param2):
+        print('Inicio', funcion.__name__)
+        funcion(*param1, **param2)
+        print('Fin', funcion.__name__)
+    return funciondecorada
+    
+def suma(a, b):
+    print(a + b)
+
+suma2 = decorador1(suma)
+suma2(1,2)
+suma3 = decorador1(suma)
+suma3(2,2)
+
+# Otra forma más elegante, usando @:
+
+@decorador1
+def producto(arg1, arg2):
+    print(arg1 * arg2)
+
+producto(5,5)
+
+
+# El siguiente decorador genera tablas de sumas
+# y multiplicaciones. El código que es común a todas 
+# las funciones se declara en la función 'envoltura':
+
+def tablas(funcion):
+    def envoltura(tabla=1):
+        print('Tabla del %i:' %tabla)
+        print('-' * 15)
+        for numero in range(0, 11):            
+            funcion(numero, tabla)
+        print('-' * 15)
+    return envoltura
+
+@tablas
+def suma(numero, tabla=1):
+    print('%2i + %2i = %3i' %(tabla, numero, tabla+numero))
+
+@tablas
+def multiplicar(numero, tabla=1):
+    print('%2i X %2i = %3i' %(tabla, numero, tabla*numero))
+
+# Muestra la tabla de sumar del 1
+suma()
+
+# Muestra la tabla de sumar del 4 
+suma(4)
+
+# Muestra la tabla de multiplicar del 1
+multiplicar()
+
+# Muestra la tabla de multiplicar del 10
+multiplicar(10)  
