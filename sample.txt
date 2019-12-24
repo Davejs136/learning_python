@@ -1,0 +1,6 @@
+Aqui hay un
+simple archivo
+txt, para 
+la lectura con Python
+
+Cool :3
