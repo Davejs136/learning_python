@@ -2,3 +2,5 @@ datos.txt
 lenguajes.dat
 
 modulos/__pycache__
+paquetes/mathematics/__pycache__
+paquetes/mathematics/advanced/__pycache__
